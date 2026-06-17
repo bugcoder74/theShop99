@@ -3,10 +3,7 @@ package com.bugcoder.theShop99.Controller;
 import com.bugcoder.theShop99.model.Category;
 import com.bugcoder.theShop99.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,16 +17,21 @@ public class CategoryController {
         this.categoryService = categoryService;
     }
 
-    private List<Category> categories = new ArrayList<>();
+    //private List<Category> categories = new ArrayList<>();
 
     @GetMapping("/api/public/categories")
     public List<Category> getAllCategories(){
-        return categories;
+        return categoryService.getAllCategories();
     }
 
     @PostMapping("/api/admin/categories")
     public String createCategory(@RequestBody Category category){ // Getting the object of Category Model Class
-        categories.add(category);
-        return "Category added Successfully";
+        categoryService.createCategory(category);
+        return "Added successfully !";
+    }
+
+    @DeleteMapping("/api/admin/categories/{categoryId}")
+    public String deleteCategory(@PathVariable Long categoryId){
+        return categoryService.deleteCategory(categoryId);
     }
 }
