@@ -1,6 +1,8 @@
 package com.bugcoder.theShop99.Controller;
 
 import com.bugcoder.theShop99.model.Category;
+import com.bugcoder.theShop99.service.CategoryService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,6 +13,12 @@ import java.util.List;
 
 @RestController
 public class CategoryController {
+
+    private CategoryService categoryService;
+
+    public CategoryController(CategoryService categoryService) {
+        this.categoryService = categoryService;
+    }
 
     private List<Category> categories = new ArrayList<>();
 
